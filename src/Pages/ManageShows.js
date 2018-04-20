@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
+import ReactPropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import Show from '../Show'
+import '../ManageShows.css'
 
 export default class ManageShows extends Component {
+    static propTypes = {
+        createShow: ReactPropTypes.func.isRequired
+
+    }
     state = {
         show: {
             name: '',
@@ -34,17 +41,11 @@ export default class ManageShows extends Component {
     }
 
     handleOnClick = () => {
-        this.setState((previousState) => {
-            const existingShows = previousState.shows
-            existingShows.push({
-                name: previousState.newShowName,
-                rating: previousState.newShowRating,
-                previewImage: previousState.newShowPreview,
-            })
+        this.props.createShow({
+            name: this.state.newShowName,
+            rating: this.state.newShowRating,
+            previewImage: this.state.newShowpreviewImage
 
-            return {
-                shows: existingShows
-            }
         })
     }
 
@@ -67,7 +68,7 @@ export default class ManageShows extends Component {
 
         //     return showComponents
 
-        return this.state.shows.map((show, i) => {
+        return this.props.allShows.map((show, i) => {
             return (
                 <Show key={i} name={show.name} rating={show.rating} previewImage={show.previewImage} />
             )
@@ -78,11 +79,13 @@ export default class ManageShows extends Component {
         // console.log(this.state)
         return (
             <div>
+                <div className="manageShows"> </div>
                 <section className="viewAllShows">
                     <header><h1> All Shows </h1></header>
                     <div>
                         {this.renderShows()}
                     </div>
+                    <Link to="/">View Shows</Link>
                 </section>
                 <section className="createShow">
                     <header><h1> New Show </h1></header>
@@ -93,7 +96,8 @@ export default class ManageShows extends Component {
                         <button onClick={this.handleOnClick}>Create</button>
                     </div>
                 </section>
-            </div>
+            </div >
+
         )
     }
 }

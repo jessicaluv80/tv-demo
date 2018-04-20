@@ -1,0 +1,18 @@
+.manageShows{ 
+    display: flex;
+    flex-direction: row;
+      
+
+}
+
+.viewAllShows{ 
+    width: 40vw;
+    background-color: greenyellow;
+
+}
+
+.createShow {
+    
+
+}
+
