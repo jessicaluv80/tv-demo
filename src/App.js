@@ -9,19 +9,18 @@ class App extends Component {
   state = {
     shows: [
       {
-        name: 'Ghost Adventures',
+        name: 'Stranger THings',
         rating: 4,
+        previewImage: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Stranger_Things_logo.png',
+      },
+      {
+        name: 'Ghost Adventures',
+        rating: 5,
         previewImage: 'https://travel.home.sndimg.com/content/dam/images/travel/fullset/2017/12/Unknown.jpeg.rend.hgtvcom.616.462.suffix/1515515037838.jpeg',
       },
       {
         name: 'Dead Files',
-        rating: 4,
-        previewImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAZ6ABREFjHAPtgkRtctiRwgkXYo00RAj_NGM-v3nosV6AVHEcmA',
-
-      },
-      {
-        name: 'Dead Files 2',
-        rating: 4,
+        rating: 2,
         previewImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAZ6ABREFjHAPtgkRtctiRwgkXYo00RAj_NGM-v3nosV6AVHEcmA',
 
       }

@@ -14,14 +14,7 @@ export default class ManageShows extends Component {
             name: '',
             rating: -1,
             previewImage: '',
-        },
-        shows: [
-            {
-                name: 'Dead Files',
-                rating: 3,
-                previewImage: 'https://scontent-iad3-1.xx.fbcdn.net/v/t1.0-9/29683803_2048628898498234_7034297162045851476_n.jpg?_nc_cat=0&oh=2e9aa27bae43d10bfe4efa77330ff2c1&oe=5B595C8F',
-            }
-        ]
+        }
     }
 
     handleOnChange = (e) => {
@@ -68,11 +61,20 @@ export default class ManageShows extends Component {
 
         //     return showComponents
 
-        return this.props.allShows.map((show, i) => {
-            return (
-                <Show key={i} name={show.name} rating={show.rating} previewImage={show.previewImage} />
-            )
-        })
+        
+            return this.props.allShows.map((show, i) => {
+                return (
+                    <Show key={i} name={show.name} rating={show.rating} previewImage={show.previewImage} />
+                )
+            })
+        }
+
+    getAvgRating = () => {
+        const sumOfRatings = this.props.allShows.reduce((accumulator, show)=>{
+            return show.rating + accumulator
+
+        }, 0) 
+        return sumOfRatings / this.props.allShows.length
     }
 
     render() {
@@ -81,7 +83,9 @@ export default class ManageShows extends Component {
             <div>
                 <div className="manageShows"> </div>
                 <section className="viewAllShows">
-                    <header><h1> All Shows </h1></header>
+                    <header><h1> All Shows </h1>
+                        <p> Avg Rating: {this.getAvgRating()}</p>
+                    </header>
                     <div>
                         {this.renderShows()}
                     </div>
