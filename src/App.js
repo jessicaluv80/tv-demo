@@ -9,7 +9,7 @@ class App extends Component {
   state = {
     shows: [
       {
-        name: 'Stranger THings',
+        name: 'STRANGER THINGS',
         rating: 4,
         previewImage: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Stranger_Things_logo.png',
       },
