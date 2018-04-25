@@ -9,10 +9,23 @@ class App extends Component {
   state = {
     shows: [
       {
+        name: 'Ghost Adventures',
+        rating: 4,
+        previewImage: 'https://travel.home.sndimg.com/content/dam/images/travel/fullset/2017/12/Unknown.jpeg.rend.hgtvcom.616.462.suffix/1515515037838.jpeg',
+      },
+      {
         name: 'Dead Files',
-        rating: 3,
-        previewImage: 'https://scontent-iad3-1.xx.fbcdn.net/v/t1.0-9/29683803_2048628898498234_7034297162045851476_n.jpg?_nc_cat=0&oh=2e9aa27bae43d10bfe4efa77330ff2c1&oe=5B595C8F',
+        rating: 4,
+        previewImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAZ6ABREFjHAPtgkRtctiRwgkXYo00RAj_NGM-v3nosV6AVHEcmA',
+
+      },
+      {
+        name: 'Dead Files 2',
+        rating: 4,
+        previewImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAZ6ABREFjHAPtgkRtctiRwgkXYo00RAj_NGM-v3nosV6AVHEcmA',
+
       }
+
     ]
   }
 
@@ -34,7 +47,7 @@ class App extends Component {
         <div className="App">
           <Switch>
             <Route exact path="/" component={() => <ViewShows allShows={this.state.shows} />} />
-            <Route path="/manageShows" component={() => <ManageShows allShows={this.state.shows} />} />
+            <Route path="/manageShows" component={() => <ManageShows allShows={this.state.shows} createShow={this.createShow} />} />
           </Switch>
         </div>
       </Router>

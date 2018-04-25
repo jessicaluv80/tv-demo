@@ -44,7 +44,7 @@ export default class ManageShows extends Component {
         this.props.createShow({
             name: this.state.newShowName,
             rating: this.state.newShowRating,
-            previewImage: this.state.newShowpreviewImage
+            previewImage: this.state.newShowPreview
 
         })
     }

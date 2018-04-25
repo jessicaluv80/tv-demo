@@ -5,12 +5,15 @@ import Show from '../Show'
 import './ViewShows.css'
 
 export default class ViewShows extends Component {
-    static propTypes = {
+    static = {
         allShows: ReactPropTypes.array.isRequired
     }
 
     renderShows = () => {
-        return this.props.allShows.map((show) => {
+        const familyfriendlyshows = this.props.allShows.filter((show) => {
+            return show.rating <= 4
+        })
+        return familyfriendlyshows.map((show) => {
             return (
                 <Show name={show.name} rating={show.rating} previewImage={show.previewImage} />
             )
