@@ -7,46 +7,75 @@ import './App.css'
 
 class App extends Component {
   state = {
-    shows: [
-      {
-        name: 'STRANGER THINGS',
-        rating: 4,
-        previewImage: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Stranger_Things_logo.png',
-      },
-      {
-        name: 'Ghost Adventures',
-        rating: 5,
-        previewImage: 'https://travel.home.sndimg.com/content/dam/images/travel/fullset/2017/12/Unknown.jpeg.rend.hgtvcom.616.462.suffix/1515515037838.jpeg',
-      },
-      {
-        name: 'Dead Files',
-        rating: 2,
-        previewImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAZ6ABREFjHAPtgkRtctiRwgkXYo00RAj_NGM-v3nosV6AVHEcmA',
-
-      }
-
-    ]
+    shows: []
   }
 
   createShow = (show) => {
-    this.setState((previousState) => {
-      const existingShows = previousState.shows
+    console.log("createdShow:", show)
+    this.setState((prev) => {
+      const existingShows = prev.shows
       existingShows.push(show)
 
       return {
         shows: existingShows
       }
     })
-
   }
+
+  startPromise = (success) => {
+  }
+
+  getShows = async () => {
+    try {
+      const showsResponse = await fetch('http://localhost:3001/shows')
+      const shows = await showsResponse.json()
+      this.setState({ shows })
+    } catch (error) {
+      this.setState({ errorMessage: error })
+    }
+  }
+
+
+  postShow = async (showToSave) => {
+    console.log(showToSave)
+    const postInit = {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(showToSave)
+    }
+
+    try {
+      const postShowsResponse = await fetch('http://localhost:3001/shows', postInit)
+      const show = await postShowsResponse.json()
+      this.createShow(show)
+    } catch (error) {
+      this.setState({ errorMessage: error })
+    }
+  }
+
+  renderError = () => {
+    return this.state.errorMessage
+      ? (<div>{this.state.errorMessage.toString()}</div>)
+      : (<div></div>)
+  }
+
+  componentDidMount() {
+    //this.testPromises()
+    this.getShows()
+  }
+
 
   render() {
     return (
       <Router>
         <div className="App">
+          {this.renderError()}
           <Switch>
             <Route exact path="/" component={() => <ViewShows allShows={this.state.shows} />} />
-            <Route path="/manageShows" component={() => <ManageShows allShows={this.state.shows} createShow={this.createShow} />} />
+            <Route path="/manageShows" component={() => <ManageShows allShows={this.state.shows} createShow={this.postShow} />} />
           </Switch>
         </div>
       </Router>

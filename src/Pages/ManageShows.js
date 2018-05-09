@@ -70,6 +70,10 @@ export default class ManageShows extends Component {
         }
 
     getAvgRating = () => {
+        if(this.props.allShows.length < 1){
+            return 0
+        }
+
         const sumOfRatings = this.props.allShows.reduce((accumulator, show)=>{
             return show.rating + accumulator
 
